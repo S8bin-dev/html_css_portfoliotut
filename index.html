@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Sabin Baral | Polymer Researcher & Engineer Portfolio</title>
+    <meta name="description" content="Sabin Baral - Polymer Science and Engineering researcher specializing in block copolymers, organic solar cells, and advanced characterization techniques including GIWAXS, GISAXS, and AFM." />
+    <meta name="keywords" content="Sabin Baral, Polymer Science, Materials Engineering, GIWAXS, GISAXS, Block Copolymers, Organic Solar Cells, Research Portfolio" />
+    <meta name="author" content="Sabin Baral" />
+    
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="Sabin Baral | Polymer Researcher & Engineer" />
+    <meta property="og:description" content="Undergraduate researcher specializing in polymer science, advanced characterization techniques, and materials engineering." />
+    <meta property="og:image" content="./assets/profile-pic.png" />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sabin Baral | Polymer Researcher & Engineer" />
+    <meta name="twitter:description" content="Undergraduate researcher specializing in polymer science and materials engineering." />
+    <meta name="twitter:image" content="./assets/profile-pic.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon.png" />
+    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+  </head>
+  <body>
+    <!-- Particle Background Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+
+    <nav id="desktop-nav">
+      <div class="logo">Sabin Baral</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <nav id="hamburger-nav">
+      <div class="logo">Sabin Baral</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </div>
+      </div>
+    </nav>
+    
+    <section id="profile">
+      <div class="section__pic-container fade-in">
+        <img src="./assets/profile-pic.png" alt="Sabin Baral - Polymer Researcher" loading="eager" />
+      </div>
+      <div class="section__text fade-in">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title">Sabin Baral</h1>
+        <p class="section__text__p2">Polymer Researcher and Engineer</p>
+        
+        <!-- Current Research Badge -->
+        <div class="research-badge pulse">
+          <span class="badge-dot"></span>
+          Currently Researching: Block Copolymer Self-Assembly
+        </div>
+        
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2 ripple"
+            onclick="window.open('./assets/Sabin-Baral-Resume.pdf')"
+            aria-label="Download CV"
+          >
+            Download CV
+          </button>
+          <button class="btn btn-color-1 ripple" onclick="location.href='./#contact'" aria-label="Contact Information">
+            Contact Info
+          </button>
+        </div>
+        <div id="socials-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="LinkedIn Profile - Sabin Baral"
+            class="icon social-icon bounce"
+            onclick="location.href='https://www.linkedin.com/in/baralsabin/'"
+          />
+          <img
+            src="./assets/github.png"
+            alt="GitHub Profile - Sabin Baral"
+            class="icon social-icon bounce"
+            onclick="location.href='https://github.com/S8bin-dev'"
+          />
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Scroll down arrow"
+        class="icon arrow"
+        onclick="location.href='./#about'"
+      />
+    </section>
+
+    <section id="about">
+      <p class="section__text__p1 fade-in-up">Get To Know More</p>
+      <h1 class="title fade-in-up">About Me</h1>
+      <div class="section-container">
+        <div class="section__pic-container fade-in-left">
+          <img
+            src="./assets/about-pic.png"
+            alt="Sabin Baral in laboratory"
+            class="about-pic"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers fade-in-right">
+            <div class="details-container hover-lift">
+              <img
+                src="./assets/experience.png"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p>1+ years <br />Undergraduate Researcher</p>
+            </div>
+            <div class="details-container hover-lift">
+              <img
+                src="./assets/education.png"
+                alt="Education icon"
+                class="icon"
+              />
+              <h3>Education</h3>
+              <p>Pursuing B.Sc in Polymer Science and Engineering<br />Minor: Chemistry and Mathematics</p>
+            </div>
+          </div>
+          <div class="text-container fade-in-right">
+            <p>
+              I'm a passionate polymer science researcher with a deep fascination for understanding how molecular structures translate into real-world materials. My work focuses on advanced characterization techniques and fabrication methods that push the boundaries of what's possible in materials engineering. From exploring block copolymer self-assembly to optimizing organic solar cell performance, I thrive on solving complex problems at the intersection of chemistry, physics, and engineering. When I'm not in the lab running GIWAXS experiments, you'll find me designing 3D-printed solutions or diving into data analysis with Python and MATLAB. I'm driven by the belief that innovative materials can address some of our most pressing technological challenges.
+            </p>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Scroll down arrow"
+        class="icon arrow"
+        onclick="location.href='./#experience'"
+      />
+    </section>
+
+    <section id="experience">
+      <p class="section__text__p1 fade-in-up">Explore My</p>
+      <h1 class="title fade-in-up">Skills</h1>
+
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container hover-lift fade-in-up">
+            <h2 class="experience-sub-title">Characterization Techniques</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>GIWAXS</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>GISAXS</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>AFM</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>DLS</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>TGA</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>DSC</h3>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="details-container hover-lift fade-in-up">
+            <h2 class="experience-sub-title">Design and Analysis</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>AutoCAD</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>OpenSCAD</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>IgorPro</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>ChemDraw</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>OriginPro</h3>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="details-container hover-lift fade-in-up">
+            <h2 class="experience-sub-title">Programming</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>MATLAB</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Python</h3>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Checkmark icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>IgorPro</h3>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Scroll down arrow"
+        class="icon arrow"
+        onclick="location.href='./#projects'"
+      />
+    </section>
+
+    <section id="projects">
+      <p class="section__text__p1 fade-in-up">Browse My Recent</p>
+      <h1 class="title fade-in-up">Research and Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container color-container project-card fade-in-up">
+            <div class="article-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Block Copolymer Thin Film Research"
+                class="project-img"
+                loading="lazy"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">High Throughput Block Copolymer Thin Film Fabrication and Characterization</h2>
+            <p class="project-duration">May 2025 - Present</p>
+            <div class="project-stats">
+              <div class="stat-item">
+                <span class="stat-number">40%</span>
+                <span class="stat-label">Time Reduction</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Samples Analyzed</span>
+              </div>
+            </div>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn ripple"
+                onclick="openModal('modal1')"
+                aria-label="Learn more about block copolymer project"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container project-card fade-in-up">
+            <div class="article-container">
+              <img
+                src="./assets/project-2.png"
+                alt="Organic Solar Cells Research"
+                class="project-img"
+                loading="lazy"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Fabrication and Thermal Stability Analysis of Organic Solar Cells</h2>
+            <p class="project-duration">Jan 2025 - May 2025</p>
+            <div class="project-stats">
+              <div class="stat-item">
+                <span class="stat-number">15%</span>
+                <span class="stat-label">Efficiency Boost</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Devices Tested</span>
+              </div>
+            </div>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn ripple"
+                onclick="openModal('modal2')"
+                aria-label="Learn more about solar cells project"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container project-card fade-in-up">
+            <div class="article-container">
+              <img
+                src="./assets/project-3.png"
+                alt="3D Printing Applications"
+                class="project-img"
+                loading="lazy"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Real World Problem Solving Through 3D Printing</h2>
+            <p class="project-duration">Dec 2024 - Present</p>
+            <div class="project-stats">
+              <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Solutions Created</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">$500+</span>
+                <span class="stat-label">Cost Savings</span>
+              </div>
+            </div>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn ripple"
+                onclick="openModal('modal3')"
+                aria-label="Learn more about 3D printing project"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Scroll down arrow"
+        class="icon arrow"
+        onclick="location.href='./#contact'"
+      />
+    </section>
+
+    <!-- PROJECT MODALS -->
+    <div id="modal1" class="modal" role="dialog" aria-labelledby="modal1-title" aria-modal="true">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')" aria-label="Close modal">&times;</span>
+        <h2 id="modal1-title" class="modal-title">High Throughput Block Copolymer Thin Film Fabrication and Characterization</h2>
+        
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="./assets/project-1.png" alt="Block Copolymer Research Details" loading="lazy" />
+          </div>
+          
+          <div class="modal-section">
+            <h3>Project Overview</h3>
+            <p>This research focuses on developing efficient methodologies for fabricating and characterizing block copolymer thin films at scale. Block copolymers self-assemble into nanoscale structures that have applications in next-generation semiconductor manufacturing, filtration membranes, and energy storage devices. The high-throughput approach allows for rapid screening of processing conditions to optimize film morphology and properties.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>My Role & Responsibilities</h3>
+            <p>As the lead undergraduate researcher on this project, I designed and executed the experimental workflow including:</p>
+            <ul>
+              <li>Sample preparation using spin-coating and thermal annealing techniques</li>
+              <li>Conducting GIWAXS and GISAXS measurements at synchrotron facilities</li>
+              <li>Data analysis and pattern interpretation using IgorPro and Python</li>
+              <li>Developing automated processing scripts to handle large datasets</li>
+              <li>Presenting findings at research group meetings and preparing technical reports</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Techniques & Methods</h3>
+            <ul>
+              <li><strong>Grazing-Incidence Wide-Angle X-ray Scattering (GIWAXS)</strong> - Crystalline structure analysis</li>
+              <li><strong>Grazing-Incidence Small-Angle X-ray Scattering (GISAXS)</strong> - Morphology characterization</li>
+              <li><strong>Atomic Force Microscopy (AFM)</strong> - Surface topography imaging</li>
+              <li><strong>Thermal Analysis</strong> - DSC and TGA for phase behavior studies</li>
+              <li><strong>Computational Tools</strong> - MATLAB and Python for data processing and visualization</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Results & Outcomes</h3>
+            <p>Developed a streamlined workflow that reduced characterization time by 40% while maintaining data quality. Identified key processing parameters that influence domain spacing and orientation. Results contributed to understanding structure-property relationships in block copolymer systems. Currently preparing findings for publication and presentation at the American Chemical Society conference.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>Links & Resources</h3>
+            <p>
+              <a href="#" target="_blank">Research Poster</a> | 
+              <a href="#" target="_blank">Data Analysis Repository</a> | 
+              <a href="https://xiaodangu.wixsite.com/guresearchgroup/research" target="_blank">Lab Group Website</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal" role="dialog" aria-labelledby="modal2-title" aria-modal="true">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')" aria-label="Close modal">&times;</span>
+        <h2 id="modal2-title" class="modal-title">Fabrication and Thermal Stability Analysis of Organic Solar Cells</h2>
+        
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="./assets/project-2.png" alt="Organic Solar Cell Research Details" loading="lazy" />
+          </div>
+          
+          <div class="modal-section">
+            <h3>Project Overview</h3>
+            <p>Organic photovoltaics (OPVs) offer a promising pathway to sustainable energy with advantages like flexibility, low-cost manufacturing, and tunable optical properties. This project investigated the thermal stability of polymer-based solar cells, addressing one of the key challenges limiting their commercial viability. Understanding degradation mechanisms under thermal stress is critical for extending device lifetime and improving performance reliability.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>My Role & Responsibilities</h3>
+            <p>I was responsible for the complete device lifecycle from fabrication to characterization:</p>
+            <ul>
+              <li>Fabricating organic solar cells using solution processing and vacuum deposition techniques</li>
+              <li>Conducting accelerated aging studies under controlled temperature conditions</li>
+              <li>Measuring current-voltage characteristics and power conversion efficiency</li>
+              <li>Performing morphological analysis using AFM to track structural changes</li>
+              <li>Analyzing thermal stability using TGA and DSC</li>
+              <li>Correlating performance degradation with structural and compositional changes</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Techniques & Methods</h3>
+            <ul>
+              <li><strong>Device Fabrication</strong> - Spin coating, thermal evaporation, and encapsulation</li>
+              <li><strong>J-V Characterization</strong> - Solar simulator and source meter measurements</li>
+              <li><strong>Atomic Force Microscopy (AFM)</strong> - Surface morphology and phase separation analysis</li>
+              <li><strong>Thermal Analysis</strong> - TGA for decomposition temperature, DSC for glass transition</li>
+              <li><strong>UV-Vis Spectroscopy</strong> - Absorption spectra and optical bandgap determination</li>
+              <li><strong>Data Analysis</strong> - OriginPro and Python for statistical analysis and visualization</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Results & Outcomes</h3>
+            <p>Identified critical temperature thresholds beyond which device performance degrades significantly. Discovered that morphological stability of the active layer is a primary factor in thermal degradation. Proposed optimized annealing protocols that improve initial efficiency while maintaining better long-term stability. Findings have implications for device design and processing strategies in organic electronics.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>Links & Resources</h3>
+            <p>
+               <a href="./assets/researchpos2.png" target="_blank">
+                Research Poster
+              </a>  | 
+              <a href="https://www.usm.edu/polymer-science-engineering/optoelec_device_lab.php" target="_blank">Lab Website</a> 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal3" class="modal" role="dialog" aria-labelledby="modal3-title" aria-modal="true">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal3')" aria-label="Close modal">&times;</span>
+        <h2 id="modal3-title" class="modal-title">Real World Problem Solving Through 3D Printing</h2>
+        
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="./assets/project-3.png" alt="3D Printing Projects Details" loading="lazy" />
+          </div>
+          
+          <div class="modal-section">
+            <h3>Project Overview</h3>
+            <p>This ongoing initiative demonstrates the practical application of additive manufacturing to solve real-world challenges in laboratory and everyday settings. By leveraging 3D printing technology, I've developed custom solutions ranging from specialized lab equipment holders to functional prototypes for research applications. The project showcases the intersection of design thinking, materials knowledge, and rapid prototyping.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>My Role & Responsibilities</h3>
+            <p>End-to-end ownership of the design and fabrication process:</p>
+            <ul>
+              <li>Identifying problems and needs in laboratory and practical settings</li>
+              <li>Conceptualizing and designing solutions using CAD software (AutoCAD, OpenSCAD)</li>
+              <li>Optimizing designs for printability, structural integrity, and material efficiency</li>
+              <li>3D printing using FDM technology with various thermoplastics</li>
+              <li>Post-processing and quality testing of printed components</li>
+              <li>Iterating designs based on user feedback and performance testing</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Techniques & Methods</h3>
+            <ul>
+              <li><strong>CAD Design</strong> - AutoCAD for complex geometries, OpenSCAD for parametric modeling</li>
+              <li><strong>3D Printing</strong> - FDM (Fused Deposition Modeling) with PLA, PETG, and ABS materials</li>
+              <li><strong>Material Selection</strong> - Choosing appropriate polymers based on mechanical requirements</li>
+              <li><strong>Process Optimization</strong> - Print parameter tuning for quality and efficiency</li>
+              <li><strong>Iterative Design</strong> - Rapid prototyping and testing cycles</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Results & Outcomes</h3>
+            <p>Successfully designed and fabricated over 15 unique solutions including custom sample holders for characterization equipment, modular storage systems for laboratory consumables, and specialized fixtures for experimental setups. These tools have improved lab efficiency and reduced equipment costs. The project has also enhanced my skills in design thinking, materials selection, and practical engineering problem-solving.</p>
+          </div>
+
+          <div class="modal-section">
+            <h3>Example Applications</h3>
+            <ul>
+              <li>Custom substrate holders for thin film deposition</li>
+              <li>Modular rack systems for organizing laboratory samples</li>
+              <li>Specialized mounts for AFM cantilever storage</li>
+              <li>Protective cases for sensitive optical components</li>
+              <li>Adapters for connecting non-standard laboratory equipment</li>
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h3>Links & Resources</h3>
+            <p>
+              <a href="https://github.com/S8bin-dev" target="_blank">GitHub - CAD Files Repository</a> | 
+              <a href="#" target="_blank">Design Portfolio</a> | 
+              <a href="#" target="_blank">Thingiverse Profile</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="contact">
+      <p class="section__text__p1 fade-in-up">Get in Touch</p>
+      <h1 class="title fade-in-up">Contact Me</h1>
+      
+      <!-- Contact Form -->
+      <div class="contact-form-container fade-in-up">
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-color-1 ripple">Send Message</button>
+        </form>
+        <div id="formSuccess" class="form-success">
+          <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. I'll get back to you soon!</p>
+        </div>
+      </div>
+
+      <p class="contact-divider fade-in-up">OR</p>
+
+      <div class="contact-info-upper-container fade-in-up">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email.png"
+            alt="Email icon"
+            class="icon contact-icon email-icon"
+          />
+          <p><a href="mailto:Sabin.Baral@usm.edu">Sabin.Baral@usm.edu</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="LinkedIn icon"
+            class="icon contact-icon"
+          />
+          <p><a href="https://www.linkedin.com/in/baralsabin/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2025 Sabin Baral. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
