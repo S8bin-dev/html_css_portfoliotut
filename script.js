@@ -248,6 +248,112 @@ function animateCounter(element, start, end, duration, suffix = '', prefix = '')
 }
 
 // ========================================
+// LIGHTBOX GALLERY FUNCTIONALITY
+// ========================================
+let currentImageIndex = 0;
+const galleryImages = [
+  {
+    src: './assets/1.5 by 1.5 thinfilmholderwithlid.png',
+    caption: '1.5" × 1.5" Thin Film Holder with Lid'
+  },
+  {
+    src: './assets/2 by 1 2 by 2thinflmhh.png',
+    caption: '2" × 1" and 2" × 2" Thin Film Holders'
+  },
+  {
+    src: './assets/Loadcellcover.png',
+    caption: 'Load Cell Protective Cover'
+  },
+  {
+    src: './assets/loadcellmount1.png',
+    caption: 'Load Cell Mount - Design 1'
+  },
+  {
+    src: './assets/loadcellmount2.png',
+    caption: 'Load Cell Mount - Design 2'
+  },
+  {
+    src: './assets/pipetteholder1.png',
+    caption: 'Pipette Holder - Fume Hood Design'
+  },
+  {
+    src: './assets/pipetteholder2.png',
+    caption: 'Pipette Holder - Lab Bench Design'
+  },
+  {
+    src: './assets/robosoccerbot.png',
+    caption: 'Robo Soccer Bot - Optimized Ball Handler'
+  },
+  {
+    src: './assets/Vileholer.png',
+    caption: 'Custom Vial Holder System'
+  }
+];
+
+function openLightbox(index) {
+  currentImageIndex = index;
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  
+  lightbox.classList.add('active');
+  lightboxImg.src = galleryImages[index].src;
+  lightboxCaption.textContent = galleryImages[index].caption;
+  lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+  
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+function navigateLightbox(direction) {
+  currentImageIndex += direction;
+  
+  // Loop around
+  if (currentImageIndex < 0) {
+    currentImageIndex = galleryImages.length - 1;
+  } else if (currentImageIndex >= galleryImages.length) {
+    currentImageIndex = 0;
+  }
+  
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  
+  // Fade out
+  lightboxImg.style.opacity = '0';
+  
+  setTimeout(() => {
+    lightboxImg.src = galleryImages[currentImageIndex].src;
+    lightboxCaption.textContent = galleryImages[currentImageIndex].caption;
+    lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+    
+    // Fade in
+    lightboxImg.style.opacity = '1';
+  }, 150);
+}
+
+// Keyboard navigation for lightbox
+document.addEventListener('keydown', function(event) {
+  const lightbox = document.getElementById('lightbox');
+  
+  if (lightbox.classList.contains('active')) {
+    if (event.key === 'Escape') {
+      closeLightbox();
+    } else if (event.key === 'ArrowLeft') {
+      navigateLightbox(-1);
+    } else if (event.key === 'ArrowRight') {
+      navigateLightbox(1);
+    }
+  }
+});
+
+// ========================================
 // CONSOLE MESSAGE (Easter Egg)
 // ========================================
 console.log('%c👋 Hello Fellow Developer!', 'font-size: 20px; font-weight: bold; color: #2563eb;');

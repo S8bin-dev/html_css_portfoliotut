@@ -20,12 +20,11 @@ body.dark-mode {
   --text-medium: rgb(200, 200, 200);
   --text-light: rgb(150, 150, 150);
   --border-color: rgb(75, 75, 75);
-  --bg-light: rgb(45, 45, 45); /* slightly lighter gray */
-  background-color: rgb(45, 45, 45); /* main background */
+  --bg-light: rgb(45, 45, 45);
+  background-color: rgb(45, 45, 45);
   color: var(--text-medium);
 }
 
-/* Fix dark mode background for hero/profile/main sections */
 body.dark-mode #profile,
 body.dark-mode section,
 body.dark-mode .hero,
@@ -36,7 +35,6 @@ body.dark-mode #contact {
   background-color: rgb(45, 45, 45);
 }
 
-/* Fix full-page edges */
 html.dark-mode,
 body.dark-mode {
   background-color: rgb(45, 45, 45);
@@ -143,7 +141,6 @@ a,
 .btn {
   transition: all 300ms ease;
 }
-
 
 /* RIPPLE EFFECT */
 .ripple {
@@ -439,7 +436,7 @@ section {
   box-sizing: border-box;
   max-width: 1400px;
   position: relative;
-  scroll-margin-top: -15vh;  /* Add negative margin to pull content up slightly */
+  scroll-margin-top: -15vh;
 }
 
 #profile {
@@ -1024,6 +1021,195 @@ body.dark-mode .close {
 .modal-section a:hover {
   color: var(--primary-hover);
   text-decoration-thickness: 2px;
+}
+
+/* GALLERY SECTION */
+.gallery-section {
+  margin-top: 3rem;
+}
+
+.gallery-section p {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(37, 99, 235, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay span {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  padding: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+  transition: opacity 0.15s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2001;
+}
+
+.lightbox-close:hover {
+  color: var(--primary-color);
+  transform: rotate(90deg);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 20px;
+  user-select: none;
+  transition: all 0.3s ease;
+  z-index: 2001;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+.lightbox-caption {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  max-width: 800px;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(10px);
 }
 
 /* CONTACT SECTION */
