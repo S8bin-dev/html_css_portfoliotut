@@ -20,7 +20,7 @@
 
   #hamburger-nav {
     display: flex;
-    position: sticky;
+    position: relative;
     top: 0;
     background: white;
     z-index: 100;
@@ -274,6 +274,7 @@
 
   #projects .about-containers {
     gap: 2rem;
+    flex-direction: column;
   }
 
   .details-container {
