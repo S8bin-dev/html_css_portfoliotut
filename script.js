@@ -27,7 +27,11 @@ function initDarkMode() {
   const darkModeToggle = document.getElementById('darkModeToggle');
   const body = document.body;
 
-  if (localStorage.getItem('darkMode') === 'enabled') {
+  const savedMode = localStorage.getItem('darkMode');
+  const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Enable dark mode if saved as 'enabled' OR (not saved AND system prefers dark)
+  if (savedMode === 'enabled' || (!savedMode && systemPrefersDark)) {
     body.classList.add('dark-mode');
   }
 
