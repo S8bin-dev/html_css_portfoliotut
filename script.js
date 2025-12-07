@@ -1,392 +1,349 @@
+
 // ========================================
 // PORTFOLIO - JAVASCRIPT
 // ========================================
 
-// Toggle Menu
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
-}
+document.addEventListener('DOMContentLoaded', () => {
+  initDarkMode();
+  initNavigation();
+  initScrollEffects();
+  initTypingEffect();
+  initContactForm();
+  initRippleEffect();
+  initProjectStats();
+  initLightbox();
 
-// ========================================
-// DARK MODE TOGGLE
-// ========================================
-const darkModeToggle = document.getElementById('darkModeToggle');
-const body = document.body;
+  // Reveal sections
+  revealSections();
 
-// Check for saved dark mode preference
-if (localStorage.getItem('darkMode') === 'enabled') {
-  body.classList.add('dark-mode');
-}
-
-darkModeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark-mode');
-  
-  if (body.classList.contains('dark-mode')) {
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    localStorage.setItem('darkMode', 'disabled');
-  }
+  console.log('🎉 Portfolio fully loaded and initialized!');
 });
 
-// ========================================
-// MODAL FUNCTIONS
-// ========================================
-function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-  modal.style.display = "block";
-  document.body.style.overflow = "hidden";
-}
 
-function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  modal.style.display = "none";
-  document.body.style.overflow = "auto";
-}
+// ========================================
+// DARK MODE
+// ========================================
+function initDarkMode() {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const body = document.body;
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = "none";
-    document.body.style.overflow = "auto";
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
   }
-}
 
-// Close modal with Escape key
-document.addEventListener('keydown', function(event) {
-  if (event.key === "Escape") {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-      if (modal.style.display === "block") {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
       }
     });
   }
-});
-
-// ========================================
-// BACK TO TOP BUTTON
-// ========================================
-const backToTopButton = document.getElementById('backToTop');
-
-window.addEventListener('scroll', function() {
-  if (window.pageYOffset > 300) {
-    backToTopButton.classList.add('show');
-  } else {
-    backToTopButton.classList.remove('show');
-  }
-});
-
-backToTopButton.addEventListener('click', function() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
-
-// ========================================
-// INTERSECTION OBSERVER FOR ANIMATIONS
-// ========================================
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, observerOptions);
-
-// Observe all animated elements
-document.addEventListener('DOMContentLoaded', function() {
-  const fadeElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
-  fadeElements.forEach(el => {
-    observer.observe(el);
-  });
-});
-
-// ========================================
-// TYPING EFFECT FOR NAME
-// ========================================
-const titleElement = document.querySelector('.typing-effect');
-if (titleElement) {
-  const text = titleElement.textContent;
-  titleElement.textContent = '';
-  titleElement.style.opacity = '1';
-  
-  let i = 0;
-  function typeWriter() {
-    if (i < text.length) {
-      titleElement.textContent += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 100);
-    }
-  }
-  
-  setTimeout(typeWriter, 500);
 }
 
 // ========================================
-// CONTACT FORM HANDLING
+// NAVIGATION
 // ========================================
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Basic validation
-    if (name && email && message) {
-      // Hide form and show success message
-      contactForm.style.display = 'none';
-      formSuccess.classList.add('show');
-      
-      // Here you would normally send the form data to a server
-      // For now, we'll just log it
-      console.log('Form submitted:', { name, email, message });
-      
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        contactForm.reset();
-        contactForm.style.display = 'flex';
-        formSuccess.classList.remove('show');
-      }, 5000);
-    }
-  });
+function initNavigation() {
+  // Hamburger Menu
+  window.toggleMenu = function () {
+    const menu = document.querySelector(".menu-links");
+    const icon = document.querySelector(".hamburger-icon");
+    menu.classList.toggle("open");
+    icon.classList.toggle("open");
+  };
 }
 
 // ========================================
-// RIPPLE EFFECT ON BUTTONS
+// SCROLL EFFECTS
 // ========================================
-document.querySelectorAll('.ripple').forEach(button => {
-  button.addEventListener('click', function(e) {
-    const ripple = document.createElement('span');
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - size / 2;
-    const y = e.clientY - rect.top - size / 2;
-    
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-    ripple.classList.add('ripple-effect');
-    
-    button.appendChild(ripple);
-    
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-  });
-});
-
-// ========================================
-// PROJECT STATS COUNTER ANIMATION
-// ========================================
-const statNumbers = document.querySelectorAll('.stat-number');
-
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const target = entry.target;
-      const finalValue = target.textContent;
-      
-      // Only animate numbers, not text with %
-      if (finalValue.includes('%')) {
-        const numValue = parseInt(finalValue);
-        animateCounter(target, 0, numValue, 1500, '%');
-      } else if (finalValue.includes('+')) {
-        const numValue = parseInt(finalValue);
-        animateCounter(target, 0, numValue, 1500, '+');
-      } else if (finalValue.includes('$')) {
-        const numValue = parseInt(finalValue.replace('$', ''));
-        animateCounter(target, 0, numValue, 1500, '$', '+');
+function initScrollEffects() {
+  // Back to Top
+  const backToTopButton = document.getElementById('backToTop');
+  if (backToTopButton) {
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
       }
-      
-      statsObserver.unobserve(target);
-    }
-  });
-}, { threshold: 0.5 });
+    });
 
-statNumbers.forEach(stat => {
-  statsObserver.observe(stat);
-});
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Intersection Observer for Fade In
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.animation = 'none'; // Stop CSS animation to allow manual control if needed
+      }
+    });
+  }, observerOptions);
+
+  const fadeElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
+  fadeElements.forEach(el => observer.observe(el));
+}
+
+// ========================================
+// TYPING EFFECT
+// ========================================
+function initTypingEffect() {
+  const titleElement = document.querySelector('.typing-effect');
+  if (titleElement) {
+    const text = titleElement.textContent;
+    titleElement.textContent = '';
+    titleElement.style.opacity = '1';
+
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        titleElement.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    setTimeout(typeWriter, 500);
+  }
+}
+
+// ========================================
+// CONTACT FORM
+// ========================================
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch('https://formspree.io/f/xqarlrdl', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          contactForm.style.display = 'none';
+          if (formSuccess) formSuccess.classList.add('show');
+          contactForm.reset();
+
+          // Reset form view after delay
+          setTimeout(() => {
+            contactForm.style.display = 'flex';
+            if (formSuccess) formSuccess.classList.remove('show');
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+          }, 5000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Oops! There was a problem submitting your form. Please try again or email me directly.');
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+}
+
+// ========================================
+// RIPPLE EFFECT
+// ========================================
+function initRippleEffect() {
+  document.querySelectorAll('.ripple').forEach(button => {
+    button.addEventListener('click', function (e) {
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.classList.add('ripple-effect');
+
+      button.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+// ========================================
+// PROJECT STATS
+// ========================================
+function initProjectStats() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const finalValue = target.textContent;
+
+        if (finalValue.includes('%')) {
+          animateCounter(target, 0, parseInt(finalValue), 1500, '%');
+        } else if (finalValue.includes('+')) {
+          animateCounter(target, 0, parseInt(finalValue), 1500, '+');
+        } else if (finalValue.includes('$')) {
+          animateCounter(target, 0, parseInt(finalValue.replace('$', '')), 1500, '$', '+');
+        }
+        statsObserver.unobserve(target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(stat => statsObserver.observe(stat));
+}
 
 function animateCounter(element, start, end, duration, suffix = '', prefix = '') {
   const startTime = performance.now();
-  
   function update(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    
-    // Easing function for smooth animation
     const easeOutQuart = 1 - Math.pow(1 - progress, 4);
     const current = Math.floor(start + (end - start) * easeOutQuart);
-    
     element.textContent = prefix + current + suffix;
-    
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      element.textContent = prefix + end + suffix;
-    }
+    if (progress < 1) requestAnimationFrame(update);
+    else element.textContent = prefix + end + suffix;
   }
-  
   requestAnimationFrame(update);
 }
 
 // ========================================
-// LIGHTBOX GALLERY FUNCTIONALITY
+// LIGHTBOX GALLERY
 // ========================================
-let currentImageIndex = 0;
-const galleryImages = [
-  {
-    src: './assets/1.5 by 1.5 thinfilmholderwithlid.png',
-    caption: '1.5" × 1.5" Thin Film Holder with Lid'
-  },
-  {
-    src: './assets/2 by 1 2 by 2thinflmhh.png',
-    caption: '2" × 1" and 2" × 2" Thin Film Holders'
-  },
-  {
-    src: './assets/Loadcellcover.png',
-    caption: 'Load Cell Protective Cover'
-  },
-  {
-    src: './assets/loadcellmount1.png',
-    caption: 'Load Cell Mount - Design 1'
-  },
-  {
-    src: './assets/loadcellmount2.png',
-    caption: 'Load Cell Mount - Design 2'
-  },
-  {
-    src: './assets/pipetteholder1.png',
-    caption: 'Pipette Holder - Fume Hood Design'
-  },
-  {
-    src: './assets/pipetteholder2.png',
-    caption: 'Pipette Holder - Lab Bench Design'
-  },
-  {
-    src: './assets/robosoccerbot.png',
-    caption: 'Robo Soccer Bot - Optimized Ball Handler'
-  },
-  {
-    src: './assets/Vileholer.png',
-    caption: 'Custom Vial Holder System'
-  }
-];
-
-function openLightbox(index) {
-  currentImageIndex = index;
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
-  const lightboxCounter = document.getElementById('lightbox-counter');
-  
-  lightbox.classList.add('active');
-  lightboxImg.src = galleryImages[index].src;
-  lightboxCaption.textContent = galleryImages[index].caption;
-  lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
-  
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  lightbox.classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-function navigateLightbox(direction) {
-  currentImageIndex += direction;
-  
-  // Loop around
-  if (currentImageIndex < 0) {
-    currentImageIndex = galleryImages.length - 1;
-  } else if (currentImageIndex >= galleryImages.length) {
-    currentImageIndex = 0;
-  }
-  
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
-  const lightboxCounter = document.getElementById('lightbox-counter');
-  
-  // Fade out
-  lightboxImg.style.opacity = '0';
-  
-  setTimeout(() => {
-    lightboxImg.src = galleryImages[currentImageIndex].src;
-    lightboxCaption.textContent = galleryImages[currentImageIndex].caption;
-    lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
-    
-    // Fade in
-    lightboxImg.style.opacity = '1';
-  }, 150);
-}
-
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', function(event) {
-  const lightbox = document.getElementById('lightbox');
-  
-  if (lightbox.classList.contains('active')) {
-    if (event.key === 'Escape') {
-      closeLightbox();
-    } else if (event.key === 'ArrowLeft') {
-      navigateLightbox(-1);
-    } else if (event.key === 'ArrowRight') {
-      navigateLightbox(1);
+function initLightbox() {
+  // Expose functions to global scope for onclick handlers
+  window.openModal = function (modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden";
     }
-  }
-});
+  };
 
-// ========================================
-// CONSOLE MESSAGE (Easter Egg)
-// ========================================
-console.log('%c👋 Hello Fellow Developer!', 'font-size: 20px; font-weight: bold; color: #2563eb;');
-console.log('%c🎨 Like what you see? This portfolio was built with passion and pure vanilla JavaScript!', 'font-size: 14px; color: #666;');
-console.log('%c📧 Feel free to reach out: Sabin.Baral@usm.edu', 'font-size: 12px; color: #999;');
-console.log('%c🚀 Keep building awesome things!', 'font-size: 12px; font-style: italic; color: #2563eb;');
+  window.closeModal = function (modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  };
 
-// ========================================
-// PERFORMANCE MONITORING
-// ========================================
-if ('PerformanceObserver' in window) {
-  const perfObserver = new PerformanceObserver((list) => {
-    for (const entry of list.getEntries()) {
-      if (entry.entryType === 'largest-contentful-paint') {
-        console.log('LCP:', entry.renderTime || entry.loadTime);
-      }
+  // Close modal when clicking outside
+  window.onclick = function (event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  // Escape key for modals
+  document.addEventListener('keydown', (event) => {
+    if (event.key === "Escape") {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (modal.style.display === "block") {
+          modal.style.display = "none";
+          document.body.style.overflow = "auto";
+        }
+      });
+      closeLightbox();
     }
   });
-  
-  try {
-    perfObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-  } catch (e) {
-    // Observer not supported
-  }
+
+  // Gallery Data
+  const galleryImages = [
+    { src: './assets/1.5 by 1.5 thinfilmholderwithlid.png', caption: '1.5" × 1.5" Thin Film Holder with Lid' },
+    { src: './assets/2 by 1 2 by 2thinflmhh.png', caption: '2" × 1" and 2" × 2" Thin Film Holders' },
+    { src: './assets/Loadcellcover.png', caption: 'Load Cell Protective Cover' },
+    { src: './assets/loadcellmount1.png', caption: 'Load Cell Mount - Design 1' },
+    { src: './assets/loadcellmount2.png', caption: 'Load Cell Mount - Design 2' },
+    { src: './assets/pipetteholder1.png', caption: 'Pipette Holder - Fume Hood Design' },
+    { src: './assets/pipetteholder2.png', caption: 'Pipette Holder - Lab Bench Design' },
+    { src: './assets/robosoccerbot.png', caption: 'Robo Soccer Bot - Optimized Ball Handler' },
+    { src: './assets/Vileholer.png', caption: 'Custom Vial Holder System' }
+  ];
+
+  let currentImageIndex = 0;
+
+  window.openLightbox = function (index) {
+    currentImageIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    if (lightbox && lightboxImg) {
+      lightbox.classList.add('active');
+      lightboxImg.src = galleryImages[index].src;
+      lightboxCaption.textContent = galleryImages[index].caption;
+      lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeLightbox = function () {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  window.navigateLightbox = function (direction) {
+    currentImageIndex += direction;
+    if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+    else if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    if (lightboxImg) {
+      lightboxImg.style.opacity = '0';
+      setTimeout(() => {
+        lightboxImg.src = galleryImages[currentImageIndex].src;
+        lightboxCaption.textContent = galleryImages[currentImageIndex].caption;
+        lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        lightboxImg.style.opacity = '1';
+      }, 150);
+    }
+  };
+
+  // Keyboard navigation for lightbox
+  document.addEventListener('keydown', (event) => {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox && lightbox.classList.contains('active')) {
+      if (event.key === 'ArrowLeft') window.navigateLightbox(-1);
+      else if (event.key === 'ArrowRight') window.navigateLightbox(1);
+    }
+  });
 }
 
-// ========================================
-// INITIALIZE ALL FEATURES
-// ========================================
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎉 Portfolio fully loaded and initialized!');
-  
-  // Add smooth reveal to all sections
+function revealSections() {
   const sections = document.querySelectorAll('section');
   sections.forEach((section, index) => {
     section.style.opacity = '0';
@@ -395,4 +352,4 @@ document.addEventListener('DOMContentLoaded', () => {
       section.style.opacity = '1';
     }, index * 100);
   });
-});
+}
